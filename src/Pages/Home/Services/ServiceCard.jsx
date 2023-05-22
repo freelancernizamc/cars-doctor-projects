@@ -6,11 +6,11 @@ const ServiceCard = ({ service }) => {
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">
-                <img src={img} alt="img" className="rounded-xl" />
+                <img src={img} alt="service" className="rounded-xl" />
             </figure>
             <div className="card-body">
-                <h2 className={title}>Shoes!</h2>
-                <p className="text-xl text-orange-500 font-bold">Price: ${price}</p>
+                <h2 className="card-title">{title}</h2>
+                <p className="text-xl text-orange-500">Price: ${price}</p>
                 <div className="card-actions">
                     <Link to={`/book/${_id}`}>
                         <button className="btn btn-primary">Book Now</button>

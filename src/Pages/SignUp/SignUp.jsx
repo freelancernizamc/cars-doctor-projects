@@ -11,10 +11,11 @@ const SignUp = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
-        console.log(name, email, password, confirmPassword);
+        console.log(name, photo, email, password, confirmPassword);
 
         if (password !== confirmPassword) {
             console.log("Passwords do not match.");
@@ -24,6 +25,21 @@ const SignUp = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                fetch('https://car-doctors-server-freelancernizamc.vercel.app/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.insertedId) {
+                            alert('Users added successfully')
+                            form.reset();
+                        }
+                    })
                 console.log('created user', user)
             })
             .catch(error => console.log(error))
@@ -46,7 +62,13 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" name='name' placeholder="email" className="input input-bordered" required />
+                                <input type="text" name='name' placeholder="Name" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo Url</span>
+                                </label>
+                                <input type="url" name='photo' placeholder="Photo Url" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">

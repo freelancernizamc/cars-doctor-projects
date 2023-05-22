@@ -24,6 +24,9 @@ const NavBar = () => {
         {user?.email ? <>
             <li><Link to='/bookings'>My Bookings</Link></li>
             <li><button onClick={handleLogOut}>Log Out</button></li>
+            <div className="w-10 rounded-full tooltip tooltip-bottom " data-tip={user.displayName}>
+                <img src={user.photoURL} />
+            </div>
 
         </>
             : <li><Link to='/login'>Login</Link></li>
